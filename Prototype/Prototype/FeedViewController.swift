@@ -23,7 +23,6 @@ class FeedViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
         refresh()
         tableView.setContentOffset(CGPoint(x: 0, y: -tableView.contentInset.top), animated: false)
     }
@@ -36,7 +35,6 @@ class FeedViewController: UITableViewController {
     }
     
     private func refresh() {
-        refreshControl = UIRefreshControl(frame: CGRect(x: view.bounds.width/2, y: 5, width: 10, height: 10))
         refreshControl?.beginRefreshing()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             if self.tableModel.isEmpty {

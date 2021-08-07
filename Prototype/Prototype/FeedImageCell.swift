@@ -23,7 +23,6 @@ public class FeedImageCell: UITableViewCell {
     
     public lazy var locationContainer: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [pinContainer, locationLabel])
-        stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .horizontal
         stack.spacing = 16
         stack.distribution = .fillProportionally
@@ -32,21 +31,18 @@ public class FeedImageCell: UITableViewCell {
     
     public lazy var pinContainer: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 14))
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(pinIcon)
         return view
     }()
     
     public let pinIcon: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "pin"))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.frame = CGRect(x: 0, y: 3, width: 10, height: 14)
         return imageView
     }()
     
     public let locationLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = #colorLiteral(red: 0.6078431373, green: 0.6078431373, blue: 0.6078431373, alpha: 1) // #9b9b9b
         label.font = UIFont.systemFont(ofSize: 15)
         label.numberOfLines = 2
@@ -55,7 +51,6 @@ public class FeedImageCell: UITableViewCell {
     
     public lazy var feedImageContainer: UIView = {
         let imageContainer = UIView()
-        imageContainer.translatesAutoresizingMaskIntoConstraints = false
         imageContainer.addSubview(feedImageView)
         imageContainer.layer.cornerRadius = 22
         imageContainer.backgroundColor = #colorLiteral(red: 0.8901960784, green: 0.8901960784, blue: 0.8901960784, alpha: 1)
@@ -73,7 +68,6 @@ public class FeedImageCell: UITableViewCell {
     
     public let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1) // #4a4a4a
         label.font = UIFont.systemFont(ofSize: 16)
         label.numberOfLines = 6
@@ -98,14 +92,14 @@ public class FeedImageCell: UITableViewCell {
         superview?.awakeFromNib()
         
         feedImageView.alpha = 0
-        feedImageView.startShimmering()
+        feedImageContainer.startShimmering()
     }
     
     public override func prepareForReuse() {
         super.prepareForReuse()
         
         feedImageView.alpha = 0
-        feedImageView.startShimmering()
+        feedImageContainer.startShimmering()
     }
     
     // MARK: - Helpers
@@ -141,7 +135,7 @@ public class FeedImageCell: UITableViewCell {
                 self.feedImageView.alpha = 1
             }, completion: { completed in
                 if completed {
-                    self.feedImageView.stopShimmering()
+                    self.feedImageContainer.stopShimmering()
                 }
             }
         )
